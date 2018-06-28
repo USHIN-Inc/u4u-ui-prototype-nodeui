@@ -1,3 +1,38 @@
+// Example usage of Node class:
+
+// Creating the root node
+var root = new Node('Fruit', 'topic');
+
+// Adding leaf node to root
+root.add(new Node('Fruit is good for you', 'thought'));
+
+// Adding multiple leaf nodes to root (functional style syntax)
+root.add(new Node('Eat', 'action'))
+  .add(new Node('Give', 'action'))
+  .add(new Node('Plant', 'action'))
+  .add(new Node('Preserve', 'action'))
+  .add(new Node('Squash', 'action'))
+  .add(new Node('Ferment', 'action'))
+  .add(new Node('Cook', 'action'))
+  .add(new Node('Refine', 'action'))
+  .add(new Node('Food', 'topic'));
+
+  // Adding leaf node to preexisting leaf node (example 1)
+var leaf = root.children.find(node => node.text === 'Fruit is good for you');
+root.remove(leaf); // Removing old leaf node from tree
+leaf.add(new Node('Fruit is bad for you', 'thought')); // Amending original leaf.
+root.add(leaf); // Readding amended leaf.
+
+// Adding leaf node to preexisting leaf node (example 2)
+leaf = root.children.find(node => node.text === 'Preserve');
+root.remove(leaf); // Removing old leaf node from tree
+leaf.add(
+  (new Node('Refrigerator', 'need')).add(
+    new Node('Temperature Control', 'need')
+  )
+); // Amending original leaf.
+root.add(leaf); // Readding amended leaf.
+
 // on document load
 $(document).ready(function(){
 
@@ -30,10 +65,10 @@ $(document).ready(function(){
 	var $smallestRimWidth = 128;
 	var $smallestRimHeight = 64;
 	var $iconRimHeight = 32;
-	
-	/* 
+
+	/*
 		things to add to debug panel:
-		
+
 		number of rims: 		- # +
 		rim # mode: 			[drop down box]
 		rim # color: 			[text box]
@@ -50,16 +85,16 @@ $(document).ready(function(){
 	/* modes are:
 	b = balanced		equal region sizes
 	c = center 		fixed smallest corner regions, center regions stretched to fill
-	
+
 	modes to be made still:
 	cw = center wide 	fixed smallest(2x wide) corner regions, center regions stretched to fill
-		
+
 	n, nw... = direction weighted 1/3rd
 	*/
 
 	// an array of regions, with each regions' dimensions and mode
 	// E.G. $regionArray[1][3] would be region on the 1st outermost rim and the 3rd quadrant right-down
-	
+
 	// TODO: Make an object for each rim
 	function Rim(author, color, mode){
 		return {
@@ -72,7 +107,7 @@ $(document).ready(function(){
 	// make an array of rim objects
 	var $rimArray = [];
 
-	// make 3 example rims 
+	// make 3 example rims
 	$rimArray.push(Rim('me', '#FFDD89', 'c'));
 	$rimArray.push(Rim('bibbelo', '#CA6DAC', 'c'));
 	$rimArray.push(Rim('everyone', '#63B795', 'b'));
@@ -100,7 +135,7 @@ $(document).ready(function(){
 			// create the HTML elements with the name "region(rimNum)(regionNum)
 			// region numbers are 0-8
 			// 0 = nw, 1 = n, 2 = ne, 3 = w, 4 = c, 5 = e, 6 = sw, 7 = s, 8 = se
-			// E.G.:	region25 = east region on the 2nd outermost rim 
+			// E.G.:	region25 = east region on the 2nd outermost rim
 			$rimArray[i].region[j] = document.createElement('div');
 			$rimArray[i].region[j].id = 'region' + i.toString() + j.toString();
 			$rimArray[i].region[j].className = 'region';
@@ -123,7 +158,7 @@ $(document).ready(function(){
 		document.getElementById('region' + i.toString() + '4').style.textAlign = 'center';
 	}
 
-	
+
 
 
 	var $sizeCount;
@@ -138,7 +173,7 @@ $(document).ready(function(){
 		$rimArray[0].height = $boxHeight - $boxHeight % 3;;
 
 		$rimArray[0].hOffset = $horizontalMargin;
-		$rimArray[0].vOffset = $verticalMargin;	
+		$rimArray[0].vOffset = $verticalMargin;
 		$('#box').css('width', $rimArray[0].width);
 		$('#box').css('height', $rimArray[0].height);
 		$sizeCount = $boxHeight;
@@ -154,13 +189,13 @@ $(document).ready(function(){
 			// if it's not the outer rim
 			if (i > 0) {
 				// set the width and height to the center region (#4) width and height of the rim outside it (embed it inside)
-				$rimArray[i].width = $rimArray[i-1].w[4];	
-				$rimArray[i].height = $rimArray[i-1].h[4];	
+				$rimArray[i].width = $rimArray[i-1].w[4];
+				$rimArray[i].height = $rimArray[i-1].h[4];
 				// set the offsets
 				// set the left offset to the parent rim's leftmost region(#3)'s right edge
-				$rimArray[i].hOffset = $rimArray[i-1].x[3] + $rimArray[i-1].w[3];	
+				$rimArray[i].hOffset = $rimArray[i-1].x[3] + $rimArray[i-1].w[3];
 				// set the top offset to the parent rim's topmost region(#1)'s bottom edge
-				$rimArray[i].vOffset = $rimArray[i-1].y[1] + $rimArray[i-1].h[1];	
+				$rimArray[i].vOffset = $rimArray[i-1].y[1] + $rimArray[i-1].h[1];
 			}
 
 			// the 'balanced' mode width and height for this region
@@ -176,44 +211,44 @@ $(document).ready(function(){
 
 					// set region X coordinates
 					switch (j) {
-						// any of the leftmost regions 
-						case 0: 
-						case 3: 
-						case 6: 
+						// any of the leftmost regions
+						case 0:
+						case 3:
+						case 6:
 							// set the region's x coord to the the rims x coord plus position offset
 							$rimArray[i].x[j] = $rimArray[i].hOffset;
 							break;
-						// any of the middle column regions 
-						case 1: 
-						case 4: 
-						case 7: 
+						// any of the middle column regions
+						case 1:
+						case 4:
+						case 7:
 							$rimArray[i].x[j] = $rimArray[i].hOffset + $balancedRegionWidth;
 							break;
-						// any of the rightmost regions 
-						case 2: 
-						case 5: 
-						case 8: 
+						// any of the rightmost regions
+						case 2:
+						case 5:
+						case 8:
 							$rimArray[i].x[j] = $rimArray[i].hOffset + $balancedRegionWidth * 2;
 							break;
 					}
 					// set region y coordinates
 					switch (j) {
-						// any of the topmost regions 
-						case 0: 
-						case 1: 
-						case 2: 
+						// any of the topmost regions
+						case 0:
+						case 1:
+						case 2:
 							$rimArray[i].y[j] = $rimArray[i].vOffset;
 							break;
-						// any of the middle row regions 
-						case 3: 
-						case 4: 
-						case 5: 
+						// any of the middle row regions
+						case 3:
+						case 4:
+						case 5:
 							$rimArray[i].y[j] = $rimArray[i].vOffset + $balancedRegionHeight;
 							break;
-						// any of the bottommost regions 
-						case 6: 
-						case 7: 
-						case 8: 
+						// any of the bottommost regions
+						case 6:
+						case 7:
+						case 8:
 							$rimArray[i].y[j] = $rimArray[i].vOffset + $balancedRegionHeight * 2;
 							break;
 					}
@@ -224,16 +259,16 @@ $(document).ready(function(){
 					$('#region' + i.toString() + j.toString()).css('top', $rimArray[i].y[j]);
 					//give the region a background div
 					$regionBG = document.createElement('div');
-					$regionBG.id = 'regionBG' + i.toString(); 
-					$regionBG.style.width = '100%'; 
-					$regionBG.style.height = '100%'; 
+					$regionBG.id = 'regionBG' + i.toString();
+					$regionBG.style.width = '100%';
+					$regionBG.style.height = '100%';
 					$regionBG.style.backgroundColor = $rimArray[i].color;
 					//document.getElementById('region' + i.toString() + j.toString()).appendChild($regionBG);
 					$('#region' + i.toString() + j.toString()).css('background-color', $rimArray[i].color);
 				}
 
 
-			// if the rim is set to center mode 
+			// if the rim is set to center mode
 			} else if ($rimArray[i].mode == 'c' || $rimArray[i].mode == 'cw'){
 				var $currentRimWidth;
 				var $currentRimHeight;
@@ -277,45 +312,45 @@ $(document).ready(function(){
 
 					// set region X coordinates
 					switch (j) {
-						// any of the leftmost regions 
-						case 0: 
-						case 3: 
-						case 6: 
+						// any of the leftmost regions
+						case 0:
+						case 3:
+						case 6:
 							// set the region's x coord to the the rims x coord plus position offset
 							$rimArray[i].x[j] = $rimArray[i].hOffset;
 							break;
-						// any of the middle column regions 
-						case 1: 
-						case 4: 
-						case 7: 
+						// any of the middle column regions
+						case 1:
+						case 4:
+						case 7:
 							$rimArray[i].x[j] = $rimArray[i].hOffset + $currentRimWidth;
 							break;
-						// any of the rightmost regions 
-						case 2: 
-						case 5: 
-						case 8: 
+						// any of the rightmost regions
+						case 2:
+						case 5:
+						case 8:
 							// set the x coord to offset + middle rim width + 32 from leftmost rim
 							$rimArray[i].x[j] = $rimArray[i].hOffset + $rimArray[i].w[4] + $currentRimWidth;
 							break;
 					}
 					// set region y coordinates
 					switch (j) {
-						// any of the topmost regions 
-						case 0: 
-						case 1: 
-						case 2: 
+						// any of the topmost regions
+						case 0:
+						case 1:
+						case 2:
 							$rimArray[i].y[j] = $rimArray[i].vOffset;
 							break;
-						// any of the middle row regions 
-						case 3: 
-						case 4: 
-						case 5: 
+						// any of the middle row regions
+						case 3:
+						case 4:
+						case 5:
 							$rimArray[i].y[j] = $rimArray[i].vOffset + $currentRimHeight;
 							break;
-						// any of the bottommost regions 
-						case 6: 
-						case 7: 
-						case 8: 
+						// any of the bottommost regions
+						case 6:
+						case 7:
+						case 8:
 							$rimArray[i].y[j] = $rimArray[i].vOffset + $rimArray[i].h[4] + $currentRimHeight;
 							break;
 					}
@@ -326,10 +361,10 @@ $(document).ready(function(){
 					$('#region' + i.toString() + j.toString()).css('top', $rimArray[i].y[j]);
 					//give the region a background div
 					$regionBG = document.createElement('div');
-					$regionBG.id = 'regionBG' + i.toString(); 
-					$regionBG.style.width = '100%'; 
-					$regionBG.style.height = '100%'; 
-					//$regionBG.style.display = 'none'; 
+					$regionBG.id = 'regionBG' + i.toString();
+					$regionBG.style.width = '100%';
+					$regionBG.style.height = '100%';
+					//$regionBG.style.display = 'none';
 					$regionBG.style.backgroundColor = $rimArray[i].color;
 					//document.getElementById('region' + i.toString() + j.toString()).appendChild($regionBG);
 					$('#region' + i.toString() + j.toString()).css('background-color', $rimArray[i].color);
@@ -339,12 +374,12 @@ $(document).ready(function(){
 
 			// TO DO: CHECK THAT WIDTH AND HEIGHT ADD UP, PRINT ERROR IF NOT
 			// set the css width and height to actually resize the region
-			
+
 
 		}
 	}
 
-	// set initial sizes		
+	// set initial sizes
 
 	setSizes();
 	// each time the window is resized
@@ -356,7 +391,7 @@ $(document).ready(function(){
 		$focusedNode = ID;
 	}
 	focusNode(0);
-	
+
 	// node constructor
 	function Node(ID, parentID, shape, text){
 		return {
@@ -385,10 +420,10 @@ $(document).ready(function(){
 		$nodeArray[$numberOfNodes].children = new Array();
 		$numberOfNodes++;
 	}
-	// 	sub-opinions	
+	// 	sub-opinions
 	addNode(0, 3, 'Fruit is good for you');
 	addNode(1, 3, 'Fruit is bad for you');
-	// 	sub-actions	
+	// 	sub-actions
 	addNode(0, 5, 'Eat');
 	addNode(0, 5, 'Give');
 	addNode(0, 5, 'Plant');
@@ -407,18 +442,18 @@ $(document).ready(function(){
 	addNode(0, 5, 'Refine');
 	//	sub-topics
 	addNode(0, 8, 'Food');
-	
-	
+
+
 	var $innerRim = $rimArray.length - 1;
 
 
-	// node bars are the divs that make up the body of the node, what's clickable 
+	// node bars are the divs that make up the body of the node, what's clickable
 	// E.G.: 	$nodeBarArray[0].region[4].number[0]
-	// 		is the node bar on the innermost rim, in the center region, and it's the first node on the list 
+	// 		is the node bar on the innermost rim, in the center region, and it's the first node on the list
 	// E.G. 2: 	$nodeBarArray[1].region[2].number[2]
-	// 		is the node bar on the rim outside of the innermost rim, in the people region, and it's the third (2 nodes before it) node on the list 
+	// 		is the node bar on the rim outside of the innermost rim, in the people region, and it's the third (2 nodes before it) node on the list
 	var $nodeBarArray = [];
-	
+
 	// the central node bar is bigger
 	$centralNodeBar = document.createElement('div');
 	$centralNodeBar.id = 'centralNodeBar';
@@ -429,10 +464,10 @@ $(document).ready(function(){
 		// remove all the current nodebars
 		$('div.nodeBar').remove();
 		// for every child of the root node, make another one
-		
+
 		if (!($nodeArray[$focusedNode].children === undefined )){
 			for (var i = 0; i < $nodeArray[$focusedNode].children.length; i++){
-				// node bar region is the focused node's child's region 
+				// node bar region is the focused node's child's region
 				var $nodeBarRegion = $nodeArray[$nodeArray[$focusedNode].children[i]].shape;
 
 				// make the new node bar
@@ -476,18 +511,18 @@ $(document).ready(function(){
 	});
 
 
-				
-	
+
+
 	var debug = {
 		print : function() {
-			document.getElementById('debug').innerHTML = $debugval1;	
+			document.getElementById('debug').innerHTML = $debugval1;
 
 			}
 	};
 
     	$(window).resize(function() {
-		setSizes();		
-	});	
+		setSizes();
+	});
 
-		
+
 });
