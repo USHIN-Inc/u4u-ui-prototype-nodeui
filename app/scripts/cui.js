@@ -7,13 +7,14 @@ var CUIContainer =
         .setComponent(2, new CUINorthEastContainer())
         .setComponent(3, new CUIWestContainer())
         .setComponent(4, new CUIBalancedContainer()
-          .setComponent(4, new CUITextComponent('Center'))
+          .setComponent(4, new CUITextComponent('This is a Text Component'))
         )
         .setComponent(5, new CUIEastContainer())
         .setComponent(6, new CUISouthWestContainer())
         .setComponent(7, new CUISouthContainer())
         .setComponent(8, new CUISouthEastContainer())
-    );
+    )
+    .setComponent(7, new CUIButtonComponent('This is a Button Component'));
 
 document
   .getElementById('CUIContainer')
