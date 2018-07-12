@@ -1,38 +1,3 @@
-// Example usage of Node class:
-
-// Creating the root node
-var root = new Node('Fruit', 'topic');
-
-// Adding leaf node to root
-root.add(new Node('Fruit is good for you', 'thought'));
-
-// Adding multiple leaf nodes to root (functional style syntax)
-root.add(new Node('Eat', 'action'))
-  .add(new Node('Give', 'action'))
-  .add(new Node('Plant', 'action'))
-  .add(new Node('Preserve', 'action'))
-  .add(new Node('Squash', 'action'))
-  .add(new Node('Ferment', 'action'))
-  .add(new Node('Cook', 'action'))
-  .add(new Node('Refine', 'action'))
-  .add(new Node('Food', 'topic'));
-
-  // Adding leaf node to preexisting leaf node (example 1)
-var leaf = root.children.find(node => node.text === 'Fruit is good for you');
-root.remove(leaf); // Removing old leaf node from tree
-leaf.add(new Node('Fruit is bad for you', 'thought')); // Amending original leaf.
-root.add(leaf); // Readding amended leaf.
-
-// Adding leaf node to preexisting leaf node (example 2)
-leaf = root.children.find(node => node.text === 'Preserve');
-root.remove(leaf); // Removing old leaf node from tree
-leaf.add(
-  (new Node('Refrigerator', 'need')).add(
-    new Node('Temperature Control', 'need')
-  )
-); // Amending original leaf.
-root.add(leaf); // Readding amended leaf.
-
 // on document load
 $(document).ready(function(){
 
