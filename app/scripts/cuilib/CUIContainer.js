@@ -12,10 +12,12 @@ class CUIContainer extends CUIComponent {
       new CUITextComponent('H'),
       new CUITextComponent('I')
     ];
-    this._rendered = '';
   }
   setComponent(index, component) {
     this._components[index] = component;
     return this;
+  }
+  getComponent(index) {
+    return this._components[index];
   }
 }

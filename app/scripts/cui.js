@@ -1,9 +1,3 @@
-function myButton1Click() {
-  alert('myButton1Click called');
-}
-function myButton2Click() {
-  alert('myButton2Click called');
-}
 var CUIContainer =
   new CUIOutlineContainer()
     .setComponent(4,
@@ -22,15 +16,19 @@ var CUIContainer =
     )
     .setComponent(1, new CUIButtonComponent(
       'Button 1',
-      'myButton1Click()'
-    ))
-    .setComponent(3, new CUIButtonComponent('Button'))
-    .setComponent(7, new CUIButtonComponent(
-      'Button 2',
-      'myButton2Click()'
-    ))
-    ;
+      'myButton1Click(CUIContainer)'
+    ));
 
-document
+var num = 0;
+function myButton1Click(container) {
+  (container.getComponent(1)).text = "Button 1 clicked " + (++num) + " times";
+  renderContainer();
+}
+    
+function renderContainer() {
+  document
   .getElementById('CUIContainer')
   .innerHTML = CUIContainer.render();
+}
+
+renderContainer();
