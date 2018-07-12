@@ -4,9 +4,6 @@ class CUIButtonComponent extends CUIComponent {
     this._text = text;
     this._onclick = onclick;
   }
-  set text(text) {
-    this._text = text;
-  }
   render() {
     return ''
       + '<div class="cui-component cui-component-button cui-component-border">'
