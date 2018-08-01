@@ -1,0 +1,60 @@
+$icon-font-path: '../fonts/';
+// bower:scss
+@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+#semui {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+        "facts merits people"
+        "thoughts focus actions"
+        "feelings needs topics";
+    #merits,
+    #people,
+    #actions,
+    #topics,
+    #needs,
+    #feelings,
+    #thoughts,
+    #facts,
+    #focus {
+        height: 200px;
+    }
+    #merits {
+        grid-area: merits;
+        background: url(/img/merits.png) no-repeat center center;
+    }
+    #people {
+        grid-area: people;
+        background: url(/img/people.png) no-repeat left bottom;
+    }
+    #actions {
+        grid-area: actions;
+        background: url(/img/actions.png) no-repeat center center;
+    }
+    #topics {
+        grid-area: topics;
+        background: url(/img/topics.png) no-repeat left top;
+    }
+    #needs {
+        grid-area: needs;
+        background: url(/img/needs.png) no-repeat center center;
+    }
+    #feelings {
+        grid-area: feelings;
+        background: url(/img/feelings.png) no-repeat right top;
+    }
+    #thoughts {
+        grid-area: thoughts;
+        background: url(/img/thoughts.png) no-repeat center center;
+    }
+    #facts {
+        grid-area: facts;
+        background: url(/img/facts.png) no-repeat right bottom;
+    }
+    #focus {
+        grid-area: focus;
+    }
+}
