@@ -25,6 +25,7 @@ function generateUnorderedListFromNode(node) {
 }
 
 $('#nodeui').html(generateUnorderedListFromNode(root));
+$('#nodeui a').on('click', e => { e.preventDefault(); redrawUI(e.target.dataset.id); });
 
 function redrawUI(focusNodeId) {
     var focusNode;
@@ -127,9 +128,30 @@ function redrawUI(focusNodeId) {
 
     $('#semui a').on('click', e => { e.preventDefault(); redrawUI(e.target.dataset.id); });
 
+    $.contextMenu({
+        selector: '#semui li', 
+        callback: function(key, options) {
+            var m = "clicked: " + key + " on " + $(this).text();
+            window.console && console.log(m) || alert(m); 
+        },
+        items: {
+            "delete": {name: "Delete", icon: "delete"},
+        }
+    });
+
+    $.contextMenu({
+        selector: '#semui div', 
+        callback: function(key, options) {
+            var m = "clicked: " + key;
+            window.console && console.log(m) || alert(m); 
+        },
+        items: {
+            "add": {name: "Add", icon: "add"}
+        }
+    });
+
 }
 
-$('#nodeui a').on('click', e => { e.preventDefault(); redrawUI(e.target.dataset.id); });
-$('#semui a').on('click', e => { e.preventDefault(); redrawUI(e.target.dataset.id); });
+$('#semui > a').on('click', e => { e.preventDefault(); redrawUI(e.target.dataset.id); });
 
 redrawUI(root.id);
