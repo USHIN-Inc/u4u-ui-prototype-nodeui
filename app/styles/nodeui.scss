@@ -21,14 +21,32 @@ $icon-font-path: '../fonts/';
     #facts,
     #focus {
         height: 200px;
+        ul {
+            padding: 0;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            li {
+                display: inline-block;
+                padding: 4px;
+                margin: 4px;
+                background-color: rgba(107, 253, 149, 0.7);
+                border-radius: 12px 12px;
+                box-shadow: 6px 6px 6px rgba(0,0,0,.25);
+                border: 1px solid rgba(0,0,0,.25);
+            }
+        }
     }
+
     #merits {
         grid-area: merits;
         background: url(/img/merits.png) no-repeat center center;
     }
     #people {
         grid-area: people;
-        background: url(/img/people.png) no-repeat left bottom;
+        // background: url(/img/people.png) no-repeat left bottom;
+        background: url(/img/people.png) no-repeat center center;
     }
     #actions {
         grid-area: actions;
@@ -36,7 +54,8 @@ $icon-font-path: '../fonts/';
     }
     #topics {
         grid-area: topics;
-        background: url(/img/topics.png) no-repeat left top;
+        // background: url(/img/topics.png) no-repeat left top;
+        background: url(/img/topics.png) no-repeat center center;
     }
     #needs {
         grid-area: needs;
@@ -44,7 +63,8 @@ $icon-font-path: '../fonts/';
     }
     #feelings {
         grid-area: feelings;
-        background: url(/img/feelings.png) no-repeat right top;
+        // background: url(/img/feelings.png) no-repeat right top;
+        background: url(/img/feelings.png) no-repeat center center;
     }
     #thoughts {
         grid-area: thoughts;
@@ -52,9 +72,18 @@ $icon-font-path: '../fonts/';
     }
     #facts {
         grid-area: facts;
-        background: url(/img/facts.png) no-repeat right bottom;
+        // background: url(/img/facts.png) no-repeat right bottom;
+        background: url(/img/facts.png) no-repeat center center;
     }
     #focus {
         grid-area: focus;
+        text-align: center;
+        .focus {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: bold;
+            font-size: 2em;
+        }
     }
 }
