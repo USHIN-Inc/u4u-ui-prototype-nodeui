@@ -1,31 +1,47 @@
-var root = new Node('Fruit', 'topic');
+var root = getTree();
+render(root);
 
-root.add(new Node('Fruit is good for you', 'thought')
-        .add(new Node('Fruit is bad for you', 'thought')))
-    .add(new Node('Eat', 'action'))
-    .add(new Node('Give', 'action'))
-    .add(new Node('Plant', 'action'))
-    .add(new Node('Preserve', 'action')
-        .add(new Node('Refrigerator', 'need')
-            .add(new Node('Temperature Control', 'need'))))
-    .add(new Node('Squash', 'action'))
-    .add(new Node('Ferment', 'action'))
-    .add(new Node('Cook', 'action'))
-    .add(new Node('Refine', 'action'))
-    .add(new Node('Food', 'topic')
-        .add(new Node('Alex Garcia', 'person')
-            .add(new Node('Big fan of food', 'feeling'))));
+function getTree() {
+    var root = new Node('Fruit', 'topic')
+        .add(new Node('Fruit is good for you', 'thought')
+            .add(new Node('Fruit is bad for you', 'thought')))
+        .add(new Node('Eat', 'action'))
+        .add(new Node('Give', 'action'))
+        .add(new Node('Plant', 'action'))
+        .add(new Node('Preserve', 'action')
+            .add(new Node('Refrigerator', 'need')
+                .add(new Node('Temperature Control', 'need'))))
+        .add(new Node('Squash', 'action'))
+        .add(new Node('Ferment', 'action'))
+        .add(new Node('Cook', 'action'))
+        .add(new Node('Refine', 'action'))
+        .add(new Node('Food', 'topic')
+            .add(new Node('Alex Garcia', 'person')
+                .add(new Node('Big fan of food', 'feeling'))));
 
-function generateUnorderedListFromNode(node) {
-    var output = '';
-    output += '<ul><li><a href="/" data-id="' + node.id + '" data-tag="' + node.tag +'"><img style="height: 12px;" alt="" src="/img/' + node.tag + 's.png" /> ' + node.text + '</a>';
-    node.children.forEach(child => output += generateUnorderedListFromNode(child));
-    output += '</li></ul>';
-    return output;
+    return root;
+};
+
+function render(root) {
+    renderNavPane(root);
+    renderUIPane(root);
 }
 
-$('#nodeui').html(generateUnorderedListFromNode(root));
-$('#nodeui a').on('click', e => { e.preventDefault(); redrawUI(e.target.dataset.id); });
+function renderNavPane(root) {
+    function generateUnorderedListFromNode(node) {
+        var output = '';
+        output += '<ul><li><a href="/" data-id="' + node.id + '" data-tag="' + node.tag +'"><img style="height: 12px;" alt="" src="/img/' + node.tag + 's.png" /> ' + node.text + '</a>';
+        node.children.forEach(child => output += generateUnorderedListFromNode(child));
+        output += '</li></ul>';
+        return output;
+    }
+    $('#nodeui').html(generateUnorderedListFromNode(root));
+    $('#nodeui a').on('click', e => { e.preventDefault(); redrawUI(e.target.dataset.id); });
+}
+
+function renderUIPane(root) {
+    redrawUI(root.id);
+};
 
 function redrawUI(focusNodeId) {
     var focusNode;
@@ -51,11 +67,6 @@ function redrawUI(focusNodeId) {
     findNodeById(focusNodeId, root);
     findParentNodeByChildId(focusNodeId, root);
     childNodes = focusNode.children;
-
-    // console.log(focusNodeId);
-    // console.log(focusNode);
-    // console.log(parentNode);
-    // console.log(childNodes);
 
     $('#merits ul').empty();
     $('#people ul').empty();
@@ -131,8 +142,10 @@ function redrawUI(focusNodeId) {
     $.contextMenu({
         selector: '#semui li', 
         callback: function(key, options) {
-            var m = "clicked: " + key + " on " + $(this).text();
-            window.console && console.log(m) || alert(m); 
+            var deletedNodeId = $(this).find('a').first().data('id');
+
+
+            console.log( deletedNodeId );
         },
         items: {
             "delete": {name: "Delete", icon: "delete"},
@@ -151,7 +164,3 @@ function redrawUI(focusNodeId) {
     });
 
 }
-
-$('#semui > a').on('click', e => { e.preventDefault(); redrawUI(e.target.dataset.id); });
-
-redrawUI(root.id);
