@@ -3,7 +3,13 @@ $icon-font-path: '../fonts/';
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
 
-#semui {
+#semui-view-navigation {
+    .selected {
+        font-weight: bold;
+    }
+}
+
+#semui-view-regions {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -11,15 +17,15 @@ $icon-font-path: '../fonts/';
         "facts merits people"
         "thoughts focus actions"
         "feelings needs topics";
-    #merits,
-    #people,
-    #actions,
-    #topics,
-    #needs,
-    #feelings,
-    #thoughts,
-    #facts,
-    #focus {
+    #semui-view-region-merits,
+    #semui-view-region-people,
+    #semui-view-region-actions,
+    #semui-view-region-topics,
+    #semui-view-region-needs,
+    #semui-view-region-feelings,
+    #semui-view-region-thoughts,
+    #semui-view-region-facts,
+    #semui-view-region-focus {
         height: 200px;
         ul {
             padding: 0;
@@ -39,43 +45,43 @@ $icon-font-path: '../fonts/';
         }
     }
 
-    #merits {
+    #semui-view-region-merits {
         grid-area: merits;
         background: url(/img/merits.png) no-repeat center center;
     }
-    #people {
+    #semui-view-region-people {
         grid-area: people;
         // background: url(/img/people.png) no-repeat left bottom;
         background: url(/img/people.png) no-repeat center center;
     }
-    #actions {
+    #semui-view-region-actions {
         grid-area: actions;
         background: url(/img/actions.png) no-repeat center center;
     }
-    #topics {
+    #semui-view-region-topics {
         grid-area: topics;
         // background: url(/img/topics.png) no-repeat left top;
         background: url(/img/topics.png) no-repeat center center;
     }
-    #needs {
+    #semui-view-region-needs {
         grid-area: needs;
         background: url(/img/needs.png) no-repeat center center;
     }
-    #feelings {
+    #semui-view-region-feelings {
         grid-area: feelings;
         // background: url(/img/feelings.png) no-repeat right top;
         background: url(/img/feelings.png) no-repeat center center;
     }
-    #thoughts {
+    #semui-view-region-thoughts {
         grid-area: thoughts;
         background: url(/img/thoughts.png) no-repeat center center;
     }
-    #facts {
+    #semui-view-region-facts {
         grid-area: facts;
         // background: url(/img/facts.png) no-repeat right bottom;
         background: url(/img/facts.png) no-repeat center center;
     }
-    #focus {
+    #semui-view-region-focus {
         grid-area: focus;
         text-align: center;
         .focus {
