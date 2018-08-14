@@ -5,7 +5,8 @@
     "bootstrap-sass": "~3.3.5",
     "modernizr": "~2.8.1",
     "simple-uuid": "^1.0.1",
-    "jQuery-contextMenu": "^2.7.0"
+    "jQuery-contextMenu": "^2.7.0",
+    "pluralize": "^7.0.0"
   },
   "overrides": {
     "bootstrap-sass": {

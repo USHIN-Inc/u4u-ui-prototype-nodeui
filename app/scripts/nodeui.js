@@ -2,17 +2,6 @@
 
     var nodes = window.__INITIAL_STATE__.data || [];
 
-    var inflectedTag = {
-        "merit": "merits",
-        "person": "people",
-        "action": "actions",
-        "topic": "topics",
-        "need": "needs",
-        "feeling": "feelings",
-        "thought": "thoughts",
-        "fact": "facts"
-    }
-
     // Check if route is valid, otherwise set route to root node GUID
     if (location.hash === "") {
         var rootNode = nodes.find(node => node.parent_id === null);
@@ -43,7 +32,7 @@
                 output += 'class="selected" ';
             }
             output += 'href="#!/' + rootNode.id + '" data-id="' + rootNode.id + '" data-tag="' + rootNode.tag +'">'
-            output += '<img style="height: 12px;" alt="" src="/img/' + inflectedTag[rootNode.tag] + '.png" /> ' + rootNode.title + '</a>';
+            output += '<img style="height: 12px;" alt="" src="/img/' + pluralize(rootNode.tag) + '.png" /> ' + rootNode.title + '</a>';
             nodes.filter(node => node.parent_id === rootNode.id).forEach(currentNode => {
                 output += traverseNodes(nodes, currentNode);
             });
@@ -68,7 +57,7 @@
 
         var output = "";
         ["merit", "person", "action", "topic", "need", "feeling", "thought", "fact"].forEach(tag => {
-            output += '<div id="semui-view-region-' + inflectedTag[tag] + '"><ul>';
+            output += '<div id="semui-view-region-' + pluralize(tag) + '"><ul>';
             nodesToRender.filter(node => node.tag === tag).forEach(node => {
                 output += '<li><a href="#!/' + node.id + '" data-id="' + node.id + '" data-tag="' + node.tag +'">' + node.title + '</a></li>';
             });
