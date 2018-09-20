@@ -1,0 +1,215 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>U2U Semantic Screen</title>
+  <!-- build:css styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="/bower_components/jQuery-contextMenu/dist/jquery.contextMenu.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+  <!-- build:js scripts/vendor/modernizr.js -->
+  <script src="/bower_components/modernizr/modernizr.js"></script>
+  <!-- endbuild -->
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-center">U2U Semantic Screen</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 collapse" id="collapseExample">
+        <div class="row">
+          <h3>Navigation</h3>
+        </div>
+        <div class="row">
+          <div class="well" id="semui-view-navigation">
+            <p>Node hierarchy goes here...</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12" id="UINavPane">
+        <div class="row">
+          <h3 class="text-center">
+            UI
+            <button id="showNavButton" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              Show Navigation
+            </button>
+          </h3>
+        </div>
+        <div class="row">
+          <div id="semui-view-regions">
+            <div id="semui-view-region-focus">
+              <span class="focus">Focus node goes here...</span>
+            </div>
+            <div id="semui-view-region-merits"></div>
+            <div id="semui-view-region-people"></div>
+            <div id="semui-view-region-actions"></div>
+            <div id="semui-view-region-topics"></div>
+            <div id="semui-view-region-needs"></div>
+            <div id="semui-view-region-feelings"></div>
+            <div id="semui-view-region-thoughts"></div>
+            <div id="semui-view-region-facts"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script id="semuiViewRegionTemplate" type="x-tmpl-mustache">
+<div id="semui-view-region-{{ regionName }}" class="semui-view-region-editable">
+  <ul>
+    {{#nodes}}
+    <li><a href="#!/{{id}}" data-id="{{id}}" data-tag="{{tag}}">{{title}}</a></li>
+    {{/nodes}}
+  </ul>
+</div>
+</script>
+
+<script>
+  window.__INITIAL_STATE__ = {
+    "data": [
+      {
+        "id": 1,
+        "title": "Fruit",
+        "tag": "topic",
+        "parent_id": null
+      },
+      {
+        "id": 42,
+        "title": "Fruit is good for you",
+        "tag": "thought",
+        "parent_id": 1
+      },
+      {
+        "id": 43,
+        "title": "Fruit is bad for you",
+        "tag": "thought",
+        "parent_id": 42
+      },
+      {
+        "id": 4,
+        "title": "Eat",
+        "tag": "action",
+        "parent_id": 1
+      },
+      {
+        "id": 5,
+        "title": "Give",
+        "tag": "action",
+        "parent_id": 1
+      },
+      {
+        "id": 6,
+        "title": "Plant",
+        "tag": "action",
+        "parent_id": 1
+      },
+      {
+        "id": 7,
+        "title": "Preserve",
+        "tag": "action",
+        "parent_id": 1
+      },
+      {
+        "id": 8,
+        "title": "Refrigerator",
+        "tag": "need",
+        "parent_id": 7
+      },
+      {
+        "id": 59,
+        "title": "Temperature Control",
+        "tag": "need",
+        "parent_id": 8
+      },
+      {
+        "id": 10,
+        "title": "Squash",
+        "tag": "action",
+        "parent_id": 1
+      },
+      {
+        "id": 11,
+        "title": "Ferment",
+        "tag": "action",
+        "parent_id": 1
+      },
+      {
+        "id": 12,
+        "title": "Cook",
+        "tag": "action",
+        "parent_id": 1
+      },
+      {
+        "id": 13,
+        "title": "Refine",
+        "tag": "action",
+        "parent_id": 1
+      },
+      {
+        "id": 14,
+        "title": "Food",
+        "tag": "topic",
+        "parent_id": 1
+      },
+      {
+        "id": 15,
+        "title": "Alex Garcia",
+        "tag": "person",
+        "parent_id": 14
+      },
+      {
+        "id": 16,
+        "title": "Big fan of food",
+        "tag": "feeling",
+        "parent_id": 15
+      }
+    ]
+  };
+</script>
+
+<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+  <!-- build:js scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="/bower_components/jquery/dist/jquery.js"></script>
+  <script src="/bower_components/jQuery-contextMenu/dist/jquery.contextMenu.js"></script>
+  <script src="/bower_components/pluralize/pluralize.js"></script>
+  <script src="/bower_components/mustache.js/mustache.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:js scripts/plugins.js -->
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/button.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/carousel.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
+  <!-- endbuild -->
+
+<script>if (window.module) module = window.module;</script>
+
+  <!-- build:js scripts/main.js -->
+  <script src="scripts/main.js"></script>
+  <!-- endbuild -->
+</body>
+
+</html>

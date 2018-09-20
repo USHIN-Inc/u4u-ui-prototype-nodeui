@@ -1,0 +1,95 @@
+$icon-font-path: '../fonts/';
+// bower:scss
+@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+#semui-view-navigation {
+    .selected {
+        font-weight: bold;
+    }
+}
+
+#semui-view-regions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+        "facts merits people"
+        "thoughts focus actions"
+        "feelings needs topics";
+    #semui-view-region-merits,
+    #semui-view-region-people,
+    #semui-view-region-actions,
+    #semui-view-region-topics,
+    #semui-view-region-needs,
+    #semui-view-region-feelings,
+    #semui-view-region-thoughts,
+    #semui-view-region-facts,
+    #semui-view-region-focus {
+        height: 200px;
+        ul {
+            padding: 0;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            li {
+                display: inline-block;
+                padding: 4px;
+                margin: 4px;
+                background-color: rgba(107, 253, 149, 0.7);
+                border-radius: 12px 12px;
+                box-shadow: 6px 6px 6px rgba(0,0,0,.25);
+                border: 1px solid rgba(0,0,0,.25);
+            }
+        }
+    }
+
+    #semui-view-region-merits {
+        grid-area: merits;
+        background: url(../images/merits.png) no-repeat center center;
+    }
+    #semui-view-region-people {
+        grid-area: people;
+        // background: url(/images/people.png) no-repeat left bottom;
+        background: url(../images/people.png) no-repeat center center;
+    }
+    #semui-view-region-actions {
+        grid-area: actions;
+        background: url(../images/actions.png) no-repeat center center;
+    }
+    #semui-view-region-topics {
+        grid-area: topics;
+        // background: url(/images/topics.png) no-repeat left top;
+        background: url(../images/topics.png) no-repeat center center;
+    }
+    #semui-view-region-needs {
+        grid-area: needs;
+        background: url(../images/needs.png) no-repeat center center;
+    }
+    #semui-view-region-feelings {
+        grid-area: feelings;
+        // background: url(/images/feelings.png) no-repeat right top;
+        background: url(../images/feelings.png) no-repeat center center;
+    }
+    #semui-view-region-thoughts {
+        grid-area: thoughts;
+        background: url(../images/thoughts.png) no-repeat center center;
+    }
+    #semui-view-region-facts {
+        grid-area: facts;
+        // background: url(/images/facts.png) no-repeat right bottom;
+        background: url(../images/facts.png) no-repeat center center;
+    }
+    #semui-view-region-focus {
+        grid-area: focus;
+        text-align: center;
+        .focus {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: bold;
+            font-size: 2em;
+        }
+    }
+}
