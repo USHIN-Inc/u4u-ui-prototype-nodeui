@@ -48,8 +48,8 @@
         function traverseNodes(nodes, rootNode) {
             var output = '';
             output += '<ul><li>';
-            output += '<a ' + ((rootNode.id === selectedNode.id) ? 'class="selected" ' : '') + 'href="#!/' + rootNode.id + '" data-id="' + rootNode.id + '" data-tag="' + rootNode.tag +'">';
-            output += '<img style="height: 12px;" alt="" src="images/' + pluralize(rootNode.tag) + '.png" /> ' + rootNode.title;
+            output += '<a ' + ((rootNode.id === selectedNode.id) ? 'class="selected" ' : '') + 'href="#!/' + rootNode.id + '" data-id="' + rootNode.id + '" data-type="' + rootNode.type +'">';
+            output += '<img style="height: 12px;" alt="" src="images/' + pluralize(rootNode.type) + '.png" /> ' + rootNode.title;
             output += '</a>';
             nodes.filter(node => node.parent_id === rootNode.id).forEach(currentNode => {
                 output += traverseNodes(nodes, currentNode);
@@ -72,11 +72,11 @@
 
             $(el).html('<div id="semui-view-region-focus"><span class="focus">' + selectedNode.title + '</span></div>');
 
-            ['merit', 'person', 'action', 'topic', 'need', 'feeling', 'thought', 'fact'].forEach(tag => {
+            ['merit', 'person', 'action', 'topic', 'need', 'feeling', 'thought', 'fact'].forEach(type => {
                 var template = $('#semuiViewRegionTemplate').html();
                 var rendered = Mustache.render(template, {
-                    regionName: pluralize(tag),
-                    nodes: nodesToRender.filter(node => node.tag === tag)
+                    regionName: pluralize(type),
+                    nodes: nodesToRender.filter(node => node.type === type)
                 });
                 $(el).append(rendered);
             });
