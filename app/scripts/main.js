@@ -22,10 +22,10 @@ $(document).ready(function(){
 	var $smallestRimWidth = 128;
 	var $smallestRimHeight = 64;
 	var $iconRimHeight = 32;
-	
-	/* 
+
+	/*
 		things to add to debug panel:
-		
+
 		number of rims: 		- # +
 		rim # mode: 			[drop down box]
 		rim # color: 			[text box]
@@ -42,32 +42,35 @@ $(document).ready(function(){
 	/* modes are:
 	b = balanced		equal region sizes
 	c = center 		fixed smallest corner regions, center regions stretched to fill
-	
+
 	modes to be made still:
 	cw = center wide 	fixed smallest(2x wide) corner regions, center regions stretched to fill
-		
+
 	n, nw... = direction weighted 1/3rd
 	*/
 
 	// an array of regions, with each regions' dimensions and mode
 	// E.G. $regionArray[1][3] would be region on the 1st outermost rim and the 3rd quadrant right-down
-	
-	// TODO: Make an object for each rim
-	function Rim(author, color, mode){
-		return {
-			author : author,
-			color : color,
-			mode : mode
-		}
-	}
 
 	// make an array of rim objects
 	var $rimArray = [];
 
-	// make 3 example rims 
-	$rimArray.push(Rim('me', '#FFDD89', 'c'));
-	$rimArray.push(Rim('bibbelo', '#CA6DAC', 'c'));
-	$rimArray.push(Rim('everyone', '#63B795', 'b'));
+	// make 3 example rims
+	$rimArray.push({
+		author: 'me',
+		color: '#FFDD89',
+		mode: 'c'
+	});
+	$rimArray.push({
+		author: 'bibbelo',
+		color: '#CA6DAC',
+		mode: 'c'
+	});
+	$rimArray.push({
+		author: 'everyone',
+		color: '#63B795',
+		mode: 'b'
+	});
 
 
 	// make the rims initial rims
@@ -115,7 +118,7 @@ $(document).ready(function(){
 		document.getElementById('region' + i.toString() + '4').style.textAlign = 'center';
 	}
 
-	
+
 
 
 	var $sizeCount;
