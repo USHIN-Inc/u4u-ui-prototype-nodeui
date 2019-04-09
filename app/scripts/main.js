@@ -1,3 +1,13 @@
+console.log('\'Allo \'Allo!');
+
+// Uncomment to enable Bootstrap tooltips
+// https://getbootstrap.com/docs/4.0/components/tooltips/#example-enable-tooltips-everywhere
+$(function () { $('[data-toggle="tooltip"]').tooltip(); });
+
+// Uncomment to enable Bootstrap popovers
+// https://getbootstrap.com/docs/4.0/components/popovers/#example-enable-popovers-everywhere
+$(function () { $('[data-toggle="popover"]').popover(); });
+
 (function($, window){
 
     var nodes = window.__INITIAL_STATE__.data || [{}];
@@ -18,14 +28,14 @@
     $('#collapseExample').on('hidden.bs.collapse', function () {
       console.log('navigation hidden...');
       $('#showNavButton').html('Show Navigation');
-      $('#UINavPane').removeClass('col-md-8');
-      $('#UINavPane').addClass('col-md-12');
+      $('#UINavPane').removeClass('col-8');
+      $('#UINavPane').addClass('col-12');
     });
     $('#collapseExample').on('show.bs.collapse', function () {
       console.log('showing navigation...');
       $('#showNavButton').html('Hide Navigation');
-      $('#UINavPane').removeClass('col-md-12');
-      $('#UINavPane').addClass('col-md-8');
+      $('#UINavPane').removeClass('col-12');
+      $('#UINavPane').addClass('col-8');
     })
 
     // Listen for route changes and re-render
@@ -48,8 +58,8 @@
         function traverseNodes(nodes, rootNode) {
             var output = '';
             output += '<ul><li>';
-            output += '<a ' + ((rootNode.id === selectedNode.id) ? 'class="selected" ' : '') + 'href="#!/' + rootNode.id + '" data-id="' + rootNode.id + '" data-tag="' + rootNode.tag +'">';
-            output += '<img style="height: 12px;" alt="" src="images/' + pluralize(rootNode.tag) + '.png" /> ' + rootNode.title;
+            output += '<a ' + ((rootNode.id === selectedNode.id) ? 'class="selected" ' : '') + 'href="#!/' + rootNode.id + '" data-id="' + rootNode.id + '" data-type="' + rootNode.type +'">';
+            output += '<img style="height: 12px;" alt="" src="images/' + pluralize(rootNode.type) + '.png" /> ' + rootNode.title;
             output += '</a>';
             nodes.filter(node => node.parent_id === rootNode.id).forEach(currentNode => {
                 output += traverseNodes(nodes, currentNode);
@@ -72,11 +82,11 @@
 
             $(el).html('<div id="semui-view-region-focus"><span class="focus">' + selectedNode.title + '</span></div>');
 
-            ['merit', 'person', 'action', 'topic', 'need', 'feeling', 'thought', 'fact'].forEach(tag => {
+            ['merit', 'person', 'action', 'topic', 'need', 'feeling', 'thought', 'fact'].forEach(type => {
                 var template = $('#semuiViewRegionTemplate').html();
                 var rendered = Mustache.render(template, {
-                    regionName: pluralize(tag),
-                    nodes: nodesToRender.filter(node => node.tag === tag)
+                    regionName: pluralize(type),
+                    nodes: nodesToRender.filter(node => node.type === type)
                 });
                 $(el).append(rendered);
             });
