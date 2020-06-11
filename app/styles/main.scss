@@ -45,39 +45,35 @@
 
     #semui-view-region-merits {
         grid-area: merits;
-        background: url(../images/merits.png) no-repeat center center;
+        background: url(../images/merits.png) center center / contain no-repeat;
     }
     #semui-view-region-people {
         grid-area: people;
-        // background: url(/images/people.png) no-repeat left bottom;
-        background: url(../images/people.png) no-repeat center center;
+        background: url(../images/people.png) center center / contain no-repeat;
     }
     #semui-view-region-actions {
         grid-area: actions;
-        background: url(../images/actions.png) no-repeat center center;
+        background: url(../images/actions.png) center center / contain no-repeat;
     }
     #semui-view-region-topics {
         grid-area: topics;
-        // background: url(/images/topics.png) no-repeat left top;
-        background: url(../images/topics.png) no-repeat center center;
+        background: url(../images/topics.png) center center / contain no-repeat;
     }
     #semui-view-region-needs {
         grid-area: needs;
-        background: url(../images/needs.png) no-repeat center center;
+        background: url(../images/needs.png) center center / contain no-repeat;
     }
     #semui-view-region-feelings {
         grid-area: feelings;
-        // background: url(/images/feelings.png) no-repeat right top;
-        background: url(../images/feelings.png) no-repeat center center;
+        background: url(../images/feelings.png) center center / contain no-repeat;
     }
     #semui-view-region-thoughts {
         grid-area: thoughts;
-        background: url(../images/thoughts.png) no-repeat center center;
+        background: url(../images/thoughts.png) center center / contain no-repeat;
     }
     #semui-view-region-facts {
         grid-area: facts;
-        // background: url(/images/facts.png) no-repeat right bottom;
-        background: url(../images/facts.png) no-repeat center center;
+        background: url(../images/facts.png) center center / contain no-repeat;
     }
     #semui-view-region-focus {
         grid-area: focus;
