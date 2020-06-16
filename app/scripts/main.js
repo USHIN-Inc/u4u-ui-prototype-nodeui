@@ -1,16 +1,16 @@
-console.log("'Allo 'Allo!");
+//console.log("'Allo 'Allo!");
 
 // Uncomment to enable Bootstrap tooltips
 // https://getbootstrap.com/docs/4.0/components/tooltips/#example-enable-tooltips-everywhere
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip();
-});
+//$(function () {
+//  $('[data-toggle="tooltip"]').tooltip();
+//});
 
 // Uncomment to enable Bootstrap popovers
 // https://getbootstrap.com/docs/4.0/components/popovers/#example-enable-popovers-everywhere
-$(function () {
-  $('[data-toggle="popover"]').popover();
-});
+//$(function () {
+//  $('[data-toggle="popover"]').popover();
+//});
 
 (function ($, window) {
   var nodes = window.__INITIAL_STATE__.data || [{}];
@@ -26,20 +26,6 @@ $(function () {
   // Render the node collection
   renderSemUINav(nodes, "#semui-view-navigation");
   renderSemUIRegions(nodes, "#semui-view-regions");
-
-  // enable collapsible navigation column
-  $("#collapseExample").on("hidden.bs.collapse", function () {
-    console.log("navigation hidden...");
-    $("#showNavButton").html("Show Navigation");
-    $("#UINavPane").removeClass("col-8");
-    $("#UINavPane").addClass("col-12");
-  });
-  $("#collapseExample").on("show.bs.collapse", function () {
-    console.log("showing navigation...");
-    $("#showNavButton").html("Hide Navigation");
-    $("#UINavPane").removeClass("col-12");
-    $("#UINavPane").addClass("col-8");
-  });
 
   // Listen for route changes and re-render
   $(window).on("hashchange", function (e) {
