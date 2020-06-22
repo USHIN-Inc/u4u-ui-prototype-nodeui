@@ -31,25 +31,29 @@
         your experience.
       </p>
     <![endif]-->
-    <div id="semui-view-regions">
-      <div id="semui-view-region-focus"></div>
-      <div id="semui-view-region-merits"></div>
-      <div id="semui-view-region-people"></div>
-      <div id="semui-view-region-actions"></div>
-      <div id="semui-view-region-topics"></div>
-      <div id="semui-view-region-needs"></div>
-      <div id="semui-view-region-feelings"></div>
-      <div id="semui-view-region-thoughts"></div>
-      <div id="semui-view-region-facts"></div>
+
+    <div id="semui-view" class="position-relative">
+      <div id="semui-view-regions">
+        <div id="semui-view-region-focus"></div>
+        <div id="semui-view-region-merits"></div>
+        <div id="semui-view-region-people"></div>
+        <div id="semui-view-region-actions"></div>
+        <div id="semui-view-region-topics"></div>
+        <div id="semui-view-region-needs"></div>
+        <div id="semui-view-region-feelings"></div>
+        <div id="semui-view-region-thoughts"></div>
+        <div id="semui-view-region-facts"></div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary btn-sm border-0 bg-light position-absolute h-100"
+        style="top: 0; left: 0;"
+        data-toggle="modal"
+        data-target="#exampleModal"
+      >
+        <img src="../node_modules/bootstrap-icons/icons/chevron-right.svg" alt="">
+      </button>
     </div>
-    <button
-      type="button"
-      class="btn btn-primary"
-      data-toggle="modal"
-      data-target="#exampleModal"
-    >
-      All nodes
-    </button>
     <div
       class="modal fade"
       id="exampleModal"
