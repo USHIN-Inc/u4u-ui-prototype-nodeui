@@ -1,18 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="">
   <head>
-    <meta charset="utf-8">
-    <meta name="description" content="">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta name="description" content="" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <title>u4u ui prototype nodeui</title>
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <!-- Place favicon.ico in the root directory -->
     <!-- build:css styles/vendor.css -->
-    <link rel="stylesheet" href="/node_modules/jquery-contextmenu/dist/jquery.contextMenu.css" />
+    <link
+      rel="stylesheet"
+      href="/node_modules/jquery-contextmenu/dist/jquery.contextMenu.css"
+    />
     <!-- endbuild -->
     <!-- build:css styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/main.css" />
     <!-- endbuild -->
     <!-- build:js scripts/modernizr.js -->
     <script src="scripts/modernizr.js"></script>
@@ -20,205 +25,277 @@
   </head>
   <body>
     <!--[if IE]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="http://browsehappy.com/">upgrade your browser</a> to improve
+        your experience.
+      </p>
     <![endif]-->
 
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <h1 class="text-center">U4U Semantic Screen</h1>
+    <div id="semui-view" class="position-relative">
+      <div id="semui-view-regions">
+        <div id="semui-view-region-focus"></div>
+        <div id="semui-view-region-merits"></div>
+        <div id="semui-view-region-people"></div>
+        <div id="semui-view-region-actions"></div>
+        <div id="semui-view-region-topics"></div>
+        <div id="semui-view-region-needs"></div>
+        <div id="semui-view-region-feelings"></div>
+        <div id="semui-view-region-thoughts"></div>
+        <div id="semui-view-region-facts"></div>
       </div>
+      <button
+        type="button"
+        class="btn btn-primary btn-sm border-0 bg-light position-absolute h-100"
+        style="top: 0; left: 0;"
+        data-toggle="modal"
+        data-target="#exampleModal"
+      >
+        <img src="../node_modules/bootstrap-icons/icons/chevron-right.svg" alt="">
+      </button>
     </div>
-    <div class="row">
-      <div class="col-4 collapse" id="collapseExample">
-        <h3>Navigation</h3>
-        <div class="well" id="semui-view-navigation">
-          <p>Node hierarchy goes here...</p>
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">All nodes</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="semui-view-navigation"></div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
         </div>
       </div>
-      <div class="col-12" id="UINavPane">
-          <h3 class="text-center">
-            UI
-            <button id="showNavButton" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Show Navigation
-            </button>
-          </h3>
-          <div id="semui-view-regions">
-            <div id="semui-view-region-focus">
-              <span class="focus">Focus node goes here...</span>
-            </div>
-            <div id="semui-view-region-merits"></div>
-            <div id="semui-view-region-people"></div>
-            <div id="semui-view-region-actions"></div>
-            <div id="semui-view-region-topics"></div>
-            <div id="semui-view-region-needs"></div>
-            <div id="semui-view-region-feelings"></div>
-            <div id="semui-view-region-thoughts"></div>
-            <div id="semui-view-region-facts"></div>
-          </div>
-      </div>
     </div>
-  </div>
-
-<script id="semuiViewRegionTemplate" type="x-tmpl-mustache">
-<div id="semui-view-region-{{ regionName }}" class="semui-view-region-editable">
-  <ul>
-    {{#nodes}}
-    <li><a href="#!/{{id}}" data-id="{{id}}" data-tag="{{tag}}">{{title}}</a></li>
-    {{/nodes}}
-  </ul>
-</div>
-</script>
-
-<script>
-  window.__INITIAL_STATE__ = {
-    "data": [
-      {
-          "id": 1,
-          "title": "U4U",
-          "label": "Distributed Network System for Distributed and Open Deliberation",
-          "type": "topic",
-          "parent_id": null,
-          "lft": 1,
-          "rght": 8,
-          "created": "2018-11-07T07:17:27+00:00",
-          "modified": "2018-11-20T04:00:43+00:00",
-          "user_id": 1,
-          "user": {
-              "id": 1,
-              "email": "",
-              "created": "2018-11-07T07:07:27+00:00",
-              "modified": "2018-11-07T07:07:27+00:00",
-              "username": "admin"
+    <script id="semuiViewRegionTemplate" type="x-tmpl-mustache">
+      <div id="semui-view-region-{{ regionName }}" class="semui-view-region-editable">
+        <ul>
+          {{#nodes}}
+          <li><a href="#!/{{id}}" data-id="{{id}}" data-tag="{{tag}}">{{title}}</a></li>
+          {{/nodes}}
+        </ul>
+      </div>
+    </script>
+    <script>
+      window.__INITIAL_STATE__ = {
+        data: [
+          {
+            id: 1,
+            title: "U4U",
+            label:
+              "Distributed Network System for Distributed and Open Deliberation",
+            type: "topic",
+            parent_id: null,
+            created: "2018-11-07T07:17:27+00:00",
+            modified: "2018-11-20T04:00:43+00:00",
+            user_id: 1,
+            user: {
+              id: 1,
+              email: "",
+              created: "2018-11-07T07:07:27+00:00",
+              modified: "2018-11-07T07:07:27+00:00",
+              username: "admin",
+            },
+            parent_node: null,
           },
-          "parent_node": null
-      },
-      {
-          "id": 4,
-          "title": "Modules",
-          "label": "U4U user interfaces for persuances\u0027 specific needs",
-          "type": "topic",
-          "parent_id": 1,
-          "lft": 2,
-          "rght": 5,
-          "created": "2018-11-20T03:00:58+00:00",
-          "modified": "2018-11-20T03:00:58+00:00",
-          "user_id": 1,
-          "user": {
-              "id": 1,
-              "email": "",
-              "created": "2018-11-07T07:07:27+00:00",
-              "modified": "2018-11-07T07:07:27+00:00",
-              "username": "admin"
+          {
+            id: 4,
+            title: "Modules",
+            label: "U4U user interfaces for persuances\u0027 specific needs",
+            type: "topic",
+            parent_id: 1,
+            created: "2018-11-20T03:00:58+00:00",
+            modified: "2018-11-20T03:00:58+00:00",
+            user_id: 1,
+            user: {
+              id: 1,
+              email: "",
+              created: "2018-11-07T07:07:27+00:00",
+              modified: "2018-11-07T07:07:27+00:00",
+              username: "admin",
+            },
+            parent_node: {
+              id: 1,
+              title: "U4U",
+              label:
+                "Distributed Network System for Distributed and Open Deliberation",
+              type: "topic",
+              parent_id: null,
+              created: "2018-11-07T07:17:27+00:00",
+              modified: "2018-11-20T04:00:43+00:00",
+              user_id: 1,
+            },
           },
-          "parent_node": {
-              "id": 1,
-              "title": "U4U",
-              "label": "Distributed Network System for Distributed and Open Deliberation",
-              "type": "topic",
-              "parent_id": null,
-              "lft": 1,
-              "rght": 8,
-              "created": "2018-11-07T07:17:27+00:00",
-              "modified": "2018-11-20T04:00:43+00:00",
-              "user_id": 1
-          }
-      },
-      {
-          "id": 5,
-          "title": "U4U Module",
-          "label": "U4U module from USHIN, Inc., introducing the USHIN Semantic Screen.",
-          "type": "topic",
-          "parent_id": 4,
-          "lft": 3,
-          "rght": 4,
-          "created": "2018-11-20T03:58:47+00:00",
-          "modified": "2018-11-20T04:02:01+00:00",
-          "user_id": 1,
-          "user": {
-              "id": 1,
-              "email": "",
-              "created": "2018-11-07T07:07:27+00:00",
-              "modified": "2018-11-07T07:07:27+00:00",
-              "username": "admin"
+          {
+            id: 5,
+            title: "U4U Module",
+            label:
+              "U4U module from USHIN, Inc., introducing the USHIN Semantic Screen.",
+            type: "topic",
+            parent_id: 4,
+            created: "2018-11-20T03:58:47+00:00",
+            modified: "2018-11-20T04:02:01+00:00",
+            user_id: 1,
+            user: {
+              id: 1,
+              email: "",
+              created: "2018-11-07T07:07:27+00:00",
+              modified: "2018-11-07T07:07:27+00:00",
+              username: "admin",
+            },
+            parent_node: {
+              id: 4,
+              title: "Modules",
+              label: "U4U user interfaces for persuances\u0027 specific needs",
+              type: "topic",
+              parent_id: 1,
+              created: "2018-11-20T03:00:58+00:00",
+              modified: "2018-11-20T03:00:58+00:00",
+              user_id: 1,
+            },
           },
-          "parent_node": {
-              "id": 4,
-              "title": "Modules",
-              "label": "U4U user interfaces for persuances\u0027 specific needs",
-              "type": "topic",
-              "parent_id": 1,
-              "lft": 2,
-              "rght": 5,
-              "created": "2018-11-20T03:00:58+00:00",
-              "modified": "2018-11-20T03:00:58+00:00",
-              "user_id": 1
-          }
-      },
-      {
-          "id": 6,
-          "title": "Backend",
-          "label": "Backend service for U4U Distributed Network System",
-          "type": "topic",
-          "parent_id": 1,
-          "lft": 6,
-          "rght": 7,
-          "created": "2018-11-20T04:01:32+00:00",
-          "modified": "2018-11-20T04:01:32+00:00",
-          "user_id": 1,
-          "user": {
-              "id": 1,
-              "email": "",
-              "created": "2018-11-07T07:07:27+00:00",
-              "modified": "2018-11-07T07:07:27+00:00",
-              "username": "admin"
+          {
+            id: 6,
+            title: "Backend",
+            label: "Backend service for U4U Distributed Network System",
+            type: "topic",
+            parent_id: 1,
+            created: "2018-11-20T04:01:32+00:00",
+            modified: "2018-11-20T04:01:32+00:00",
+            user_id: 1,
+            user: {
+              id: 1,
+              email: "",
+              created: "2018-11-07T07:07:27+00:00",
+              modified: "2018-11-07T07:07:27+00:00",
+              username: "admin",
+            },
+            parent_node: {
+              id: 1,
+              title: "U4U",
+              label:
+                "Distributed Network System for Distributed and Open Deliberation",
+              type: "topic",
+              parent_id: null,
+              created: "2018-11-07T07:17:27+00:00",
+              modified: "2018-11-20T04:00:43+00:00",
+              user_id: 1,
+            },
           },
-          "parent_node": {
-              "id": 1,
-              "title": "U4U",
-              "label": "Distributed Network System for Distributed and Open Deliberation",
-              "type": "topic",
-              "parent_id": null,
-              "lft": 1,
-              "rght": 8,
-              "created": "2018-11-07T07:17:27+00:00",
-              "modified": "2018-11-20T04:00:43+00:00",
-              "user_id": 1
-          }
-      }
-    ]
-  };
-</script>
-
+        ],
+      };
+    </script>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='https://www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
+      (function (b, o, i, l, e, r) {
+        b.GoogleAnalyticsObject = l;
+        b[l] ||
+          (b[l] = function () {
+            (b[l].q = b[l].q || []).push(arguments);
+          });
+        b[l].l = +new Date();
+        e = o.createElement(i);
+        r = o.getElementsByTagName(i)[0];
+        e.src = "https://www.google-analytics.com/analytics.js";
+        r.parentNode.insertBefore(e, r);
+      })(window, document, "script", "ga");
+      ga("create", "UA-XXXXX-X");
+      ga("send", "pageview");
     </script>
     <!-- build:js scripts/vendor.js -->
-    <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="/node_modules/pluralize/pluralize.js"></script>
-    <script type="text/javascript" src="/node_modules/mustache/mustache.js"></script>
+    <script
+      type="text/javascript"
+      src="/node_modules/jquery/dist/jquery.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/node_modules/pluralize/pluralize.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/node_modules/mustache/mustache.js"
+    ></script>
     <!-- endbuild -->
     <!-- build:js scripts/plugins.js -->
-    <script type="text/javascript" src="/node_modules/jquery-contextmenu/dist/jquery.contextMenu.js"></script>
-    <script type="text/javascript" src="/node_modules/bootstrap/js/dist/index.js"></script>
-    <script type="text/javascript" src="/node_modules/bootstrap/js/dist/util.js"></script>
-    <script type="text/javascript" src="/node_modules/bootstrap/js/dist/toast.js"></script>
-    <script type="text/javascript" src="/node_modules/bootstrap/js/dist/alert.js"></script>
-    <script type="text/javascript" src="/node_modules/bootstrap/js/dist/dropdown.js"></script>
-    <script type="text/javascript" src="/node_modules/bootstrap/js/dist/tooltip.js"></script>
-    <script type="text/javascript" src="/node_modules/bootstrap/js/dist/modal.js"></script>
-    <script type="text/javascript" src="/node_modules/bootstrap/js/dist/button.js"></script>
-    <script type="text/javascript" src="/node_modules/bootstrap/js/dist/popover.js"></script>
-    <script type="text/javascript" src="/node_modules/bootstrap/js/dist/carousel.js"></script>
-    <script type="text/javascript" src="/node_modules/bootstrap/js/dist/scrollspy.js"></script>
-    <script type="text/javascript" src="/node_modules/bootstrap/js/dist/collapse.js"></script>
-    <script type="text/javascript" src="/node_modules/bootstrap/js/dist/tab.js"></script>
+    <script
+      type="text/javascript"
+      src="/node_modules/jquery-contextmenu/dist/jquery.contextMenu.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/node_modules/bootstrap/js/dist/index.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/node_modules/bootstrap/js/dist/util.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/node_modules/bootstrap/js/dist/toast.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/node_modules/bootstrap/js/dist/alert.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/node_modules/bootstrap/js/dist/dropdown.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/node_modules/bootstrap/js/dist/tooltip.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/node_modules/bootstrap/js/dist/modal.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/node_modules/bootstrap/js/dist/button.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/node_modules/bootstrap/js/dist/popover.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/node_modules/bootstrap/js/dist/carousel.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/node_modules/bootstrap/js/dist/scrollspy.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/node_modules/bootstrap/js/dist/collapse.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/node_modules/bootstrap/js/dist/tab.js"
+    ></script>
     <!-- endbuild -->
     <!-- build:js scripts/main.js -->
     <script src="scripts/main.js"></script>
